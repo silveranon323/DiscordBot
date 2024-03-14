@@ -1,17 +1,9 @@
-const { Client, Intents } = require('discord.js');
+import { Client, GatewayIntentBits } from "discord.js";
+const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent] });
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+client.on("messageCreate", (message) => {
+  console.log(message.content);
 });
-
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
-
-  if (interaction.commandName === 'ping') {
-    await interaction.reply('Pong!');
-  }
-});
-
-client.login(TOKEN);
+client.login(
+  "MTIxNzcwMzQyMTM0MDAyODkyOA.GpybfE.uzbII9IRlsa_ISsT2LLUgYgQqB-QAIotJR9iXo"
+);
