@@ -1,4 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
+import dotenv from "dotenv";
+dotenv.config();
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -12,14 +14,23 @@ client.on("messageCreate", (message) => {
   if (message.author.bot) {
     return;
   }
+  if (message.content.startsWith("create")) {
+    const url = message.content.split("create")[1];
+    return message.reply({
+      content: "Content generating for short ID for " + url,
+    });
+  }
   message.reply({
     content: "Hello silveranon",
   });
 });
 client.on("interactionCreate", (interaction) => {
   console.log(interaction);
-  interaction.reply('pong');
+  interaction.reply("pong");
 });
+
 client.login(
-  "MTIxNzcwMzQyMTM0MDAyODkyOA.Gqnhui.no_4ZI2HySQSJolmzYFXJUFyZx1VNskCeYCqWw"
+  
+  process.env.BOT_TOKEN
 );
+

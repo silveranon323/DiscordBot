@@ -1,18 +1,18 @@
 import { REST, Routes } from "discord.js";
+import dotenv from "dotenv";
+dotenv.config();
 const commands = [
   {
     name: "create",
     description: "Creates a short url",
   },
 ];
-const rest = new REST({ version: "10" }).setToken(
-  "MTIxNzcwMzQyMTM0MDAyODkyOA.Gqnhui.no_4ZI2HySQSJolmzYFXJUFyZx1VNskCeYCqWw"
-);
+const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 async function refreshCommands() {
   try {
     console.log("Started refreshing application (/) commands.");
 
-    await rest.put(Routes.applicationCommands("1217703421340028928"), {
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
       body: commands,
     });
 
